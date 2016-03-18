@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Angularjs</title>
+    <style>
+        .ng-cloak, .x-ng-cloak {
+                        display: none !important;
+                    }
+    </style>
+</head>
+<body>
+Your name: <input type="text"   ng-model="yourname" placeholder="World"><br>
+Your name:<span ng-bind="yourname"></span><br>
+<!--过滤器-->
+Your name（大写）:<span>{{yourname| uppercase}}</span>
+<hr>
+<div ng-controller="testController">
+    <input type="text"   ng-model="testname" placeholder="World">
+    <!--<div ng-repeat="x in arr |  filter:testname | orderBy:'age'">{{x.name+":"+x.age | myfilter}}</div>-->
+    <br>
+    selectedName1:<select ng-model="selectedName1"><option ng-repeat="x in arr" ng-cloak>{{x.name}}</option></select><br>
+    selectedName1:<span ng-cloak>{{selectedName1}}</span>
+    <br>
+    selectedName2:<select  ng-model="selectedName2" ng-options="x.name for x in arr"></select><br>
+    selectedName2:<span ng-cloak>{{selectedName2}}</span>
+    <br>
+    selectedName3:<select  ng-model="selectedName3" ng-options="x for (x,y) in arr2"></select><br>
+    selectedName3:<span ng-cloak>{{selectedName3}}</span>
+</div>
+<hr>
+<div ng-controller="testServer">
+    <p ng-hide="ishide">localurl:<span ng-bind="localurl"></span></p>
+    <button ng-click="hide()">{{ishide?"show":"hide"}}</button>
+</div>
+<hr>
+<div test-directive></div>
+<hr/>
+<div ng-controller="testCopier">
+    your name:<input type="text" ng-model="username"/>
+    <button ng-click="reset()">reset</button>
+    <button ng-click="clear()">clear</button>
+</div>
+<hr/>
+<div ng-controller="testForm">
+    <form  name="myForm" novalidate>
+        Email:<input type="email" name="user" ng-model="username" required/>
+        <span ng-show="myForm.user.$error.required">邮箱是必须的。</span>
+        <span ng-show="myForm.user.$error.email">非法邮箱</span>
+    </form>
+    <alert></alert>
+</div>
+
+
+
+
+<!--<script data-main="js/main" src="../tool/requirejs/require-min-2.1.22.js"></script>-->
+<script src="../tool/jquery/jquery-2.1.4.min.js"></script>
+<script src="../tool/angular/angular-1.5.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

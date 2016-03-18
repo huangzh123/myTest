@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    html,body{
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+    }
+</style>
+<body>
+    <canvas id="canvas"  style="height:100%;">
+        当浏览器不支持Canvas，请更换浏览器重试
+    </canvas>
+<script>
+    window.onload=function(){
+        var CANVARWIDTH=document.body.clientWidth;
+        var CANVARHEIGHT=document.body.clientHeight;
+        var RADIUS=5;
+        var FILLSTYLE="blue";
+        var MARGINTOP=(CANVARHEIGHT-10*2*(RADIUS+1))/2;
+        var MARGINLEFT=(CANVARWIDTH-(RADIUS+1)*2*59)/2;
+        var COLORS=["green","bluegreen","violet","yellow","red","#FFA500","#94E7FF","#C1FF2E"]
+        //画数字
+        var drawNumber=function(x,y,num,ctx){
+            var nobj=NUMIMG[num];
+            for(var i=0;i<nobj.length;i++){
+                for(var j=0;j<nobj[i].length;j++){
+                    if(nobj[i][j]==1){
+                        ctx.beginPath();
+                        ctx.arc(x+(2*j+1)*(RADIUS+1),y+(2*i+1)*(RADIUS+1),RADIUS,0,2*Math.PI);
+                        ctx.closePath();
+                        ctx.fillStyle=FILLSTYLE;
+                        ctx.fill();
+                    }
+                }
+            }
+        }
+        //动态时间
+        var drawDate=function(date,balls,ctx){
+            var hour=date.getHours();
+            var min=date.getMinutes();
+            var second=date.getSeconds();
+            ctx.clearRect(0,0,CANVARWIDTH,CANVARHEIGHT)
+            drawNumber(MARGINLEFT,MARGINTOP,parseInt(hour/10),ctx);
+            drawNumber(MARGINLEFT+3+(2*7+1)*(RADIUS+1),MARGINTOP,hour%10,ctx);
+            drawNumber(MARGINLEFT+3+2*(2*7+1)*(RADIUS+1),MARGINTOP,10,ctx);
+            drawNumber(MARGINLEFT+3+2*(2*7+1)*(RADIUS+1)+(2*4+1)*(RADIUS+1),MARGINTOP,parseInt(min/10),ctx);
+            drawNumber(MARGINLEFT+3*2+3*(2*7+1)*(RADIUS+1)+(2*4+1)*(RADIUS+1),MARGINTOP,min%10,ctx);
+            drawNumber(MARGINLEFT+3*2+4*(2*7+1)*(RADIUS+1)+(2*4+1)*(RADIUS+1),MARGINTOP,10,ctx);
+            drawNumber(MARGINLEFT+3*3+4*(2*7+1)*(RADIUS+1)+(2*4+1)*(RADIUS+1)*2,MARGINTOP,parseInt(second/10),ctx);
+            drawNumber(MARGINLEFT+3*3+5*(2*7+1)*(RADIUS+1)+(2*4+1)*(RADIUS+1)*2,MARGINTOP,second%10,ctx);
+            for(var b=0;b<balls.length;b++){
+                ctx.beginPath();
+                ctx.arc(balls[b].x,balls[b].y,balls[b].r,0,2*Math.PI);
+                ctx.closePath();
+                ctx.fillStyle=balls[b].color;
+                ctx.fill();
+            }
+        }
+        //画彩色球
+        var addBolls=function(x,y,num,balls){
+            var nobj=NUMIMG[num];
+            for(var i=0;i<nobj.length;i++){
+                for(var j=0;j<nobj[i].length;j++){
+                    if(nobj[i][j]==1){
+                        var ball={
+                            x:x+(2*j+1)*(RADIUS+1),
+                            y:y+(2*i+1)*(RADIUS+1),
+                            r:RADIUS,
+                            g:1.5+Math.random(),
+                            vx:(Math.random()>0.5?1:-1)*(Math.random()+8),
+                            vy:-7,
+                            color:COLORS[Math.floor(Math.random()*COLORS.length*10)]};
+                        balls.push(ball);
+                    }
+                }
+            }
+            console.log(balls.length)
+            return balls;
+        }
+        //更新
+        var updateBalls=function(balls){
+            var bl=balls.length;
+            for(var i=0;i<bl;i++){
+                if(!balls[i]) break;
+                balls[i].x+=balls[i].vx;
+                balls[i].y+=balls[i].vy;
+                balls[i].vy+=balls[i].g;
+                if(balls[i].y>=CANVARHEIGHT-balls[i].r){
+                    balls[i].y=CANVARHEIGHT;
+                    balls[i].vy=-balls[i].vy*0.75;
+                }
+                if(balls[i].x<balls[i].r || balls[i].x>CANVARWIDTH+balls[i].r){
+//                    balls[i].vx=-balls[i].vx*0.6;
+                    balls.splice(i,1);
+                    i--;
+                }
+            }
+//            var idx=0;
+//            for(var j=0;j<balls.length;j++){
+//                if(balls[j].x+balls[j].r>0 && balls[j].x-balls[j].r<CANVARWIDTH){
+//                    balls[idx++]=balls[j];
+//                }
+//            }
+//            while(balls.length>800){
+//            while(balls.length>Math.min(800,idx)){
+//            while(balls.length>idx){
+//                balls.pop();
+//            }
+            return balls;
+        }
+
+
+
+        var canvas=document.getElementById("canvas");
+        var context=canvas.getContext("2d");
+        canvas.width=CANVARWIDTH;
+        canvas.height=CANVARHEIGHT;
+        var lastSecond=new Date();
+        var balls=[];
+        setInterval(function(){
+            var date=new Date();
+            drawDate(date,balls,context);
+            balls=updateBalls(balls);
+            if(date.getSeconds()!=lastSecond.getSeconds()){
+                var sl=date.getSeconds();
+                var ml=date.getMinutes();
+                var hl=date.getHours();
+                var s=lastSecond.getSeconds();
+                var m=lastSecond.getMinutes();
+                var h=lastSecond.getHours();
+                lastSecond=date;
+
+                if(parseInt(s/10)!=parseInt(sl/10)){
+                    balls=addBolls(MARGINLEFT+3*2+4*(2*7+1)*(RADIUS+1)+(2*4+1)*(RADIUS+1)*2,MARGINTOP,parseInt(sl/10),balls);
+                }
+                if(s%10!=sl%10){
+                    balls=addBolls(MARGINLEFT+3*3+5*(2*7+1)*(RADIUS+1)+(2*4+1)*(RADIUS+1)*2,MARGINTOP,sl%10,balls);
+                }
+                if(parseInt(m/10)!=parseInt(ml/10)){
+                    balls=addBolls(MARGINLEFT+3+2*(2*7+1)*(RADIUS+1)+(2*4+1)*(RADIUS+1),MARGINTOP,parseInt(ml/10),balls);
+                }
+                if(m%10!=ml%10){
+                    balls=addBolls(MARGINLEFT+3*2+3*(2*7+1)*(RADIUS+1)+(2*4+1)*(RADIUS+1),MARGINTOP,ml%10,balls);
+                }
+                if(parseInt(h/10)!=parseInt(hl/10)){
+                    balls=addBolls(MARGINLEFT,MARGINTOP,parseInt(hl/10),balls);
+                }
+                if(h%10!=hl%10){
+                    balls=addBolls(MARGINLEFT+3+(2*7+1)*(RADIUS+1),MARGINTOP,hl%10,balls);
+                }
+
+            }
+        },50)
+    }
+</script>
+<script src="number.js"></script>
+</body>
+</html>
