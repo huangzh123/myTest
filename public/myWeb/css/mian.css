@@ -1,0 +1,283 @@
+body,html{
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+}
+/*head*/
+.bl-head{
+    position: relative;
+    min-height: 26rem;
+    background-color: #299983;
+    /*background:#299983 url("../img/background.jpg") no-repeat;*/
+    /*background-size: 100% auto;*/
+    text-align: center;
+    overflow: hidden;
+}
+.bl-head>img{
+    display: block;
+    height: 12rem;
+    width: 12rem;
+    border-radius: 50%;
+    /*border: 0.3rem solid #fff;*/
+    margin: 4rem auto 0;
+}
+.bl-head>.backgroundimg{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background:url("../img/background.jpg") no-repeat;
+    background-size: 100% 100%;
+    opacity:0.1;
+    z-index: 2;
+}
+.bl-head>.maintitle{
+    display: block;
+    margin-top: 1.5rem;
+    min-height: 6rem;
+    line-height: 6rem;
+    color: #fff;
+    font-size: 4rem;
+    /*overflow: hidden;*/
+}
+.bl-head>.subtitle{
+    display: block;
+    min-height: 2rem;
+    line-height: 2rem;
+    color: #fff;
+    font-size: 1.3rem;
+}
+/*menu*/
+.bl-menu{
+    background-color: #4a4a4a;
+    /*height: 3.3rem;*/
+    /*overflow: hidden;*/
+}
+
+.menu>div{
+    height: 3.3rem;
+    cursor:pointer;
+    line-height: 3.3rem;
+    font-size: 1.5rem;
+    border-bottom: 0.1rem solid #efedee;
+    color: #fff;
+    text-align: center;
+}
+.bl-menu-tap:active,.bl-menu-tap:hover{
+    background-color: #404040;
+}
+
+.open+.downloadmenu-self{
+    display: block;
+}
+.downloadmenu-self{
+    display: none;
+}
+
+.downloadmenu-self>div>div{
+    color:#fff ;
+    cursor:pointer;
+    background-color: #4a4a4a;
+}
+.downloadmenu-self>div>div:hover{
+    background-color: #404040;
+}
+.seledropdown>.dropdown-backdrop{
+    height: 0;
+    width: 0;
+    display: none;
+}
+/*main*/
+.bl-main{
+    min-height: 60rem;
+    background-color: #efedee;
+    padding-bottom: 5rem;
+}
+.leftbody,.rightbody{
+    border-top: 0.4rem solid #efedee;
+}
+.leftbody>div,.rightbody>div{
+    border: 0.4rem solid #efedee;
+}
+.bl-textarea{
+    position: relative;
+    background-color: #fff;
+    padding:0 2rem;
+}
+.bl-text-title{
+    margin: 2.7rem 0;
+    line-height: 5rem;
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+.bl-text-contants{
+    overflow: hidden;
+    font-size: 1.4rem;
+    padding-bottom: 3rem;
+}
+.bl-text-contants>img{
+    display: block;
+    max-width: 80%;
+    margin: 1rem auto;
+}
+.bl-text-author{
+    float: left;
+    font-size: 1.2rem;
+    color: #636363;
+    padding-bottom: 1.2rem;
+}
+.bl-text-date{
+    float: right;
+    font-size: 1.2rem;
+    color: #636363;
+    padding-bottom: 1.2rem;
+}
+.bl-text-date>span{
+    margin: 0 0.5rem;
+}
+
+.bl-news{
+
+}
+.bl-news-title{
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-size: 1.4rem;
+    text-align: left;
+    background-color: #299983;
+    color: #fff;
+}
+.bl-news-contants{
+    background-color: #fff;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+}
+/*foot*/
+.bl-foot{
+    position: relative;
+    min-height: 10rem;
+    text-align: center;
+    background-color: #4a4a4a;
+    border-top: 0.5rem solid #299983;
+}
+.bl-foot-contain{
+    position: absolute;
+    top: -2.8rem;
+    vertical-align: bottom;
+    height: 8rem;
+    overflow: hidden;
+}
+.foot-img{
+    border: 0.3rem solid #299983;
+    height: 8rem;
+    width: 8rem;
+    line-height: 8rem;
+    vertical-align: bottom;
+}
+.foot-main{
+    display: inline-block;
+    vertical-align: bottom;
+    height: 8rem
+}
+.foot-main-dsc{
+    height: 6rem;
+    margin-left: 2rem;
+    color: #e8e6e6;
+    vertical-align: bottom;
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-align: left;
+    line-height: 9rem;
+}
+.foot-main-exdsc{
+    height: 2rem;
+    margin-left: 2rem;
+    color: #e8e6e6;
+    vertical-align: bottom;
+    font-size: 1.4rem;
+    font-style: italic;
+    line-height: 2rem;
+}
+.bl-bottom-dsc{
+    margin: 7.2rem 0 0.6rem;
+    color: #7b7979;
+}
+
+.latest-list>a{
+    display: block;
+    min-height: 3.0rem;
+    margin: 0.3rem 0;
+    /*line-height: 2rem;*/
+    font-size: 1.3rem;
+    padding: 0.8rem 0 0.8rem 0.2rem;
+    color:#000;
+    border-bottom: 0.1rem solid #efefef;
+}
+.latest-list>a:last-child{
+    border-bottom: 0;
+}
+.latest-list>a:hover,.latest-list>a:active{
+    text-decoration: none;
+    background-color: #f1f1f1;
+}
+.greenbtn{
+    background-color: #299983;
+    color:#fff;
+    border:0.3rem solid #299983;
+}
+.bl-seach{
+    margin: 1.1rem 0;
+}
+.comment-list{
+    background-color: #fff;
+    font-size: 1.5rem;
+}
+.comment-body{
+    padding: 0.7rem 0;
+    border-bottom: 0.1rem solid #efefef;
+}
+.comment-body>img{
+    float: left;
+     height: 4.2rem;
+     width: 4.2rem;
+     margin: auto 0.9rem;
+     border-radius: 50%;
+ }
+.comment-body>div{
+    padding:0 0.7rem 0  6.0rem ;
+    min-height: 4.2rem;
+    width: 100%;
+    font-size: 1.6rem;
+}
+.comment-person{
+    height: 2.1rem;
+    line-height: 2.1rem;
+}
+.comment-person>.name{
+    color: #299983;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+.comment-person>.date{
+    /*float: right;*/
+    font-size: 1.3rem;
+    color: #c6c6c6;
+    margin-left: 1rem;
+}
+.comment-msg{
+    font-size: 1.3rem;
+    margin-top: 0.2rem;
+    min-height: 2.0rem;
+    line-height: 1.7rem;
+}
+.bl-classification>a{
+    font-size: 1.3rem;
+    color: #000;
+    margin: 0.5rem 0;
+}
+.bl-classification>a{
+    text-align: center;
+}
+.bl-classification>a:active,.bl-classification>a:hover{
+    text-decoration: none;
+    background-color: #f1f1f1;
+}
